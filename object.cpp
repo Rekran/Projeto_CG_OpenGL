@@ -24,26 +24,23 @@ glewInit();
 
 
 
-
-// Define this somewhere in your header file
-  #define BUFFER_OFFSET(i) ((char*)(i))
   
 
 
   glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
 
   glEnableClientState(GL_VERTEX_ARRAY);
-  glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3),0);    // The starting point of the VBO, for the vertices
+  glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3),0);   
 
   glEnableClientState(GL_NORMAL_ARRAY);
-  glNormalPointer(GL_FLOAT, sizeof(glm::vec3),(char*)(sizeof(glm::vec3)*indexed_vertices.size()));      // The starting point of normals, 12 bytes away
+  glNormalPointer(GL_FLOAT, sizeof(glm::vec3),(char*)(sizeof(glm::vec3)*indexed_vertices.size()));      
 
 
 
 
 
  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
-  glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0)); 
+  glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0); 
 
 
 }
