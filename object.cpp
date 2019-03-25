@@ -14,8 +14,6 @@ glewInit();
   
   glBufferSubData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*indexed_vertices.size(), sizeof(glm::vec3)*indexed_normals.size(), &indexed_normals[0].x);                // copy normals after vertices
 
-  glBufferSubData(GL_ARRAY_BUFFER, (sizeof(glm::vec3)*indexed_vertices.size())+(sizeof(glm::vec3)*indexed_normals.size()), sizeof(glm::vec2)*indexed_uvs.size(), &indexed_uvs[0].x);
-
 
 
 
@@ -39,12 +37,6 @@ glewInit();
 
   glEnableClientState(GL_NORMAL_ARRAY);
   glNormalPointer(GL_FLOAT, sizeof(glm::vec3),(char*)(sizeof(glm::vec3)*indexed_vertices.size()));      // The starting point of normals, 12 bytes away
-
-
-  glClientActiveTexture(GL_TEXTURE0);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glTexCoordPointer(2, GL_FLOAT, sizeof(glm::vec3),(char*)(sizeof(glm::vec3)*indexed_vertices.size())+(sizeof(glm::vec3)*indexed_normals.size()) ); // The starting point of texcoords, 24 bytes away
-
 
 
 
