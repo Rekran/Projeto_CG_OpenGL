@@ -19,6 +19,7 @@ private:
 public:
 	void drawObj();
 	void import(char *path);
+	void tras(glm::mat4 transfor);
 
 
 };

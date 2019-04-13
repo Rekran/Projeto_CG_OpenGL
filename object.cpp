@@ -1,5 +1,33 @@
 #include "object.h"
 
+void object::tras(glm::mat4 transfor){
+
+ 
+  for(int i = 0 ; i < this->indexed_vertices.size();i++ ){
+    glm::vec4 aux = glm::vec4(this->indexed_vertices[i],1.0);
+    aux = glm::vec4( aux * transfor );
+    this->indexed_vertices[i]= glm::vec3(aux);
+    aux = glm::vec4(this->indexed_normals[i],1.0);
+    aux = glm::vec4(aux * transfor);
+    this->indexed_normals[i]= glm::vec3(aux);
+  }
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void object::drawObj(){
 
@@ -17,6 +45,7 @@ glewInit();
 
 
 
+
 	GLuint IndexVBOID;
   glGenBuffers(1, &IndexVBOID);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
@@ -24,23 +53,26 @@ glewInit();
 
 
 
+
+// Define this somewhere in your header file
+  #define BUFFER_OFFSET(i) ((char*)(i))
   
 
 
   glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
 
   glEnableClientState(GL_VERTEX_ARRAY);
-  glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3),0);   
+  glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3),0);    // The starting point of the VBO, for the vertices
 
   glEnableClientState(GL_NORMAL_ARRAY);
-  glNormalPointer(GL_FLOAT, sizeof(glm::vec3),(char*)(sizeof(glm::vec3)*indexed_vertices.size()));      
+  glNormalPointer(GL_FLOAT, sizeof(glm::vec3),(char*)(sizeof(glm::vec3)*indexed_vertices.size()));      // The starting point of normals, 12 bytes away
 
 
 
 
 
  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
-  glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0); 
+ glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, BUFFER_OFFSET(0)); 
 
 
 }
