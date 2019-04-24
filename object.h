@@ -21,5 +21,8 @@ public:
 	void import(char *path);
 	void tras(glm::mat4 transfor);
 
+private:
+    GLuint tex;
+
 
 };

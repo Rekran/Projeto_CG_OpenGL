@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string>
 #include <cstring>
+#include <iostream>
 
 
 
@@ -9,7 +10,8 @@
 
 
 bool loadAssImp(
-	const char * path, 
+	const char * path,
+	std::string &filename,
 	std::vector<unsigned short> & indices,
 	std::vector<glm::vec3> & vertices,
 	std::vector<glm::vec2> & uvs,
@@ -56,7 +58,14 @@ bool loadAssImp(
 		indices.push_back(mesh->mFaces[i].mIndices[1]);
 		indices.push_back(mesh->mFaces[i].mIndices[2]);
 	}
-	
+
+	const aiMaterial* mtl = scene->mMaterials[mesh->mMaterialIndex];
+
+	aiString where;
+    if (mtl->GetTexture(aiTextureType_DIFFUSE, 0, &where, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
+        filename = std::string(where.C_Str());
+    }
+
 	// The "scene" pointer will be deleted automatically by "importer"
 	return true;
 }

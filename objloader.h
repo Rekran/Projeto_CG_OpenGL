@@ -14,8 +14,9 @@
 #include <assimp/postprocess.h>     // Post processing flags
 
 bool loadAssImp(
-	
-	const char * path, 
+
+	const char * path,
+	std::string &filename,
 	std::vector<unsigned short> & indices,
 	std::vector<glm::vec3> & vertices,
 	std::vector<glm::vec2> & uvs,
